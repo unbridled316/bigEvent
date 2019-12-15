@@ -31,55 +31,49 @@
             </form>
         </div>
 
-    </div> 
+    </div>
+    <!-- 引入配置地址 -->
+    <script src="./tools/config.js"></script>
+    <!-- 引入jQuery文件 -->
+    <script src="./js/jquery-1.12.4.min.js"></script>
+    <!-- 引入user.js文件 -->
+    <script src="./tools/user.js"></script>
+    <script>
 
-<!-- 引入jQuery文件 -->
-<script src="./js/jquery-1.12.4.min.js"></script>
-<script>
 
+        var $input_txt = $('.input_txt');//用户名输入框
+        var $input_pass = $('.input_pass');//密码输入框
 
-var $input_txt = $('.input_txt');//用户名输入框
-var $input_pass = $('.input_pass');//密码输入框
-
-// 1 给按钮设置点击事件
-$('.input_sub').on('click',function(){
-    //2 对输入框内容进行检测
-    var username=$input_txt.val().trim();
-    var password=$input_pass.val().trim();
-    if(username == '' || password == ''){
-        alert('请输入用户名或密码')
-        return;
-    }
-
-    //3 将输入内容发送给接口进行检测
-    $.ajax({
-        type:'post',
-        url:'http://localhost:8000/admin/login',
-        data:{
-            user_name : username,
-            password : password
-        },
-        success:function(res){
-            console.log(res)
-            if(res.code===200){
-                window.location.href = './index.html'
-            }else{
-                alert('用户名或密码错误')
+        // 1 给按钮设置点击事件
+        $('.input_sub').on('click', function () {
+            //2 对输入框内容进行检测
+            var username = $input_txt.val().trim();
+            var password = $input_pass.val().trim();
+            if (username == '' || password == '') {
+                alert('请输入用户名或密码')
+                return;
             }
-        }
+
+            //3 将输入内容发送给接口进行检测
+
+user.login({
+    user_name:username,
+    password:password
+},function (res) {
+                console.log(res)
+                if (res.code === 200) {
+                    window.location.href = './index.html'
+                } else {
+                    alert('用户名或密码错误')
+                }
+            })
+        })
 
 
 
 
-    })
 
-})
-
-
-
-
-
-</script>
+    </script>
 
 
 </body>
