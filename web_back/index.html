@@ -18,7 +18,8 @@
         <a href="#" class="logo"><img src="images/logo02.png" alt="logo"></a>
         <div class="user_info">
             <img src="images/2.jpg" alt="person">
-            <span>欢迎&nbsp;&nbsp;李思思</span>
+            <!-- <span>欢迎&nbsp;&nbsp;<span>李思思</span></span> -->
+            <span>欢迎&nbsp;&nbsp;<i style="font-style:normal">李思思</i></span>
             <b>管理员</b>
         </div>
         <div class="menu">
@@ -123,7 +124,7 @@
                 type: 'post',
                 url: 'http://localhost:8000/admin/logout',
                 success: function (res) {
-                    console.log(res)
+                    // console.log(res)
                     if (res.code === 200) {
                         location.href = './login.html';
                     } else {
@@ -136,7 +137,18 @@
 
 
 
-         //获取用户信息   
+        //获取用户信息   
+        $.ajax({
+            type: 'get',
+            url: 'http://localhost:8000/admin/getuser',
+            success:function(res){
+                console.log(res);
+                $('.user_info img').attr('src', res.data.user_pic);
+                $('.user_info i').html(res.data.nickname);
+            // 右侧
+            $('.user_center_link img').attr('src', res.data.user_pic);
+            }
+        })
 
 
     </script>
