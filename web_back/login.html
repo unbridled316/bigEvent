@@ -56,10 +56,10 @@
 
             //3 将输入内容发送给接口进行检测
 
-user.login({
-    user_name:username,
-    password:password
-},function (res) {
+            user.login({
+                user_name: username,
+                password: password
+            }, function (res) {
                 console.log(res)
                 if (res.code === 200) {
                     window.location.href = './index.html'
